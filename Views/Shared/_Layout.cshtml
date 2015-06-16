@@ -1,0 +1,117 @@
+﻿
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @{
+        <link rel="stylesheet" href="~/Content/bootstrap.min.css" />
+        <script src="~/Scripts/bootstrap.min.js"></script>
+        <script src="~/Scripts/jquery.min.js"></script>
+    }
+
+    @{
+    <script>
+    $(document).ready(function(){
+        $("#logout").hide();
+        $("#upload").hide();
+        $("#Clients").hide();
+        $("#videos").hide();
+
+        $.getJSON("/Main/getSession", function (data) {
+
+            if (data == true) {
+                $("#login").hide();
+                $("#upload").show();
+                $("#logout").show();
+                $("#signup").hide();
+            }
+            else {
+                $("#login").show();
+                $("#logout").hide();
+                $("#upload").hide();
+                $("#signup").show();
+            }
+
+            $.getJSON("/Main/getAdmin", function (data) {
+                if (data == true) {
+                    $("#login").hide();
+                    $("#upload").show();
+                    $("#logout").show();
+                    $("#Clients").show();
+                    $("#videos").show();
+                    $("#signup").hide();
+
+                }
+                else {
+                }
+            });
+
+        });
+
+         
+    });
+
+    </script>
+        
+    }
+
+</head>
+<body>
+    
+    <form action="/Main/searchVideo" method="post">
+        <nav class="navbar navbar-inverse navbar fixed-top">
+            <div class="col-md-8">
+                <div class="container-fluid">
+                    <div class="navbar-header navbar">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">Video tutorial site</a>
+                    </div>
+                    <div class="collapse navbar-collapse " id="myNavbar">
+                        <ul class="nav navbar-nav">
+                            <li class="active"><a href="/Main/HomePage">Home</a></li>
+                        </ul>
+
+                        <ul class="nav navbar-nav ">
+                            <li id="signup"><a href="/Main/signUp" id="signup"><span class="glyphicon glyphicon-sign-up"></span> Sign Up</a></li>
+                            <li id="login"><a href="/Main/signUp" id="login" ><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+                            <li id="upload"><a href="/Main/uploadVideo" id="upload" ><span class="glyphicon glyphicon-log-in"></span> upload Video</a></li>
+                            <li id="logout"><a href="/Main/logoutCurrentclient" id="logout"><span class="glyphicon glyphicon-log-in"></span>logout</a></li>
+                            <li id="Clients"><a href="/Main/showClient" id="Clients"><span class="glyphicon glyphicon-log-in"></span>Clients</a></li>
+                            <li id="videos"><a href="/Main/deleteVideo" id="videos"><span class="glyphicon glyphicon-log-in"></span>Videos Managment</a></li>
+
+                        </ul>
+                    </div>
+                </div>
+                </div>
+
+               <div class="col-md-4">
+                <div class="collapse navbar-collapse  ">
+                    <ul class="nav navbar-nav pull-right">
+                        <li><br/>
+                            <input type="text" class="form-control" value="" name="url" placeholder="serach here">
+                        </li>
+                        <li>
+                            <br/>
+                            <input type="submit" class="form-control" style="background-color:darkgray" value="search" />
+                        </li>
+
+                    </ul>
+                </div>
+              </div>      
+</nav>
+</form>
+    @RenderBody()
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

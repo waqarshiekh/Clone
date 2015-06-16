@@ -1,0 +1,45 @@
+﻿@{
+    ViewBag.Title = "searchVideo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<h2> </h2>
+<div class="container-fluid">
+    <div class="col-md-12">
+        
+        <textarea rows="1" cols="100">searching Results are @ViewBag.u </textarea>
+        
+        <blockquote>
+                    <div class="well" style="background-color:aliceblue">
+                        <p>@ViewBag.u</p>
+                        @foreach(var v in Model)
+                        { 
+                        <video width="320" height="240" controls>
+                            <source src=~/Content/Video/@v.searchName type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        }
+                    </div>
+        </blockquote>
+</div>
+
+
+    <div class="col-md-8">
+        <blockquote>
+
+
+
+
+            @foreach (var b in Model)
+            {
+                <div class="well" style="background-color:aliceblue">
+                    <p>@b.pname</p>
+                    <video width="320" height="240" controls>
+                        <source src=~/Content/Video/@b.searchName type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            }
+        </blockquote>
+        </div>
+
+    </div>

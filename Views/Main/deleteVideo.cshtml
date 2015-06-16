@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "deleteVideo";
+}
+
+<h2>DelteVideo</h2>
+
+@foreach (var v in Model)
+{
+    <blockquote>
+        <div class="well" style="background-color:aliceblue">
+                    <p>@v.pname</p>
+                        <video width="320" height="240" controls>
+                            <source src=~/Content/Video/@v.searchName   type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        
+                        <a href="/Main/dellVideo/@v.Id">
+                            Remove Video
+                        </a>
+        </div>
+    </blockquote>
+}

@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "showClient";
+    
+}
+
+
+<h2>showClient</h2>
+
+   <blockquote>
+    @foreach (var v in Model)
+    {
+        <div class="well" style="background-color:aliceblue">
+            <table>
+                <tr>
+                    <td> Name::   @v.cname </td>
+                    <td> Email::  @v.cemail  </td>
+                    <td> <a href="/Main/dellClient/@v.Id">Remove Client</a> </td>
+</tr>
+                
+            </table>
+        </div>
+    }
+</blockquote>
+

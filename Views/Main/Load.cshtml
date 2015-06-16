@@ -1,0 +1,13 @@
+﻿@{
+    ViewBag.Title = "Load";
+    Layout = null;
+}
+
+
+
+@foreach (var q in Model)
+{
+    <textarea rows="2" cols="100" placeholder="comment here" style="background-color:bisque">
+        @q.message
+    </textarea>
+}

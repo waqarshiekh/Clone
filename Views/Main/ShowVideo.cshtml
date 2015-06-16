@@ -1,0 +1,108 @@
+﻿@{
+    ViewBag.Title = "ShowVideo";
+}
+
+@{
+    <script>
+    $(document).ready(function () {
+        $("#dislike").hide();
+        $("#messageArea").hide();
+        $("#post").hide();
+
+        $.getJSON("/Main/getSession", function (data) {
+            if (data == true) {
+                $("#messageArea").show();
+                $("#post").show();
+            }
+            else {
+                $("#messageArea").hide();
+                $("#post").hide();
+            }
+        });
+
+        $("#like").click(function () {
+
+            $.getJSON("/Main/SetLike?id=+ @ViewBag.vid", function (data) {
+            });
+            $("#like").hide();
+            $("#dislike").show();
+            $.getJSON("/Main/getLike?id=+ @ViewBag.vid", function (data) {
+
+                $("#LoadLike").load("/Main/ViewLike?id=+@ViewBag.vid");
+            });
+        });
+
+            $("#dislike").click(function () {
+
+                $.getJSON("/Main/SetDisLike?id=+ @ViewBag.vid", function (data) {
+                });
+                $("#like").show();
+                $("#dislike").hide();
+                $.getJSON("/Main/getLike?id=+ @ViewBag.vid", function (data) {
+
+                    $("#LoadLike").load("/Main/ViewLike?id=+@ViewBag.vid");
+                });
+            });
+
+
+        $("#post").click(function () {
+            var v = $("#messageArea").val();
+            //alert(v);
+                $.getJSON("/Main/Comments?id=+ @ViewBag.vid", function (data) {
+                    $("#c1").load("/Main/Load?id=+@ViewBag.vid");
+                });
+            });
+        });
+    </script>
+}
+
+<h2>ShowVideo</h2>
+
+<div class="container-fluid">
+        <div class="col-md-12">
+            <blockquote>
+                <div class="well" style="background-color:aliceblue">
+                    <video width="320" height="240" controls>
+                        <source src=~/Content/Video/@ViewBag.vname type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div id="LoadLike">
+                        <p> Like::  @ViewBag.Like</p>
+                    </div>
+                    <div id="like">
+                        <input type="button" id="like" value="Like" class="btn btn-info " />
+                    </div>
+                    <div id="dislike">
+                        <input type="button" id="Dislike" value="Dislike" class="btn btn-info " />
+                    </div>
+
+                    <div id="Download">
+                        <ul>
+                            <li id="Download"> <a href="/Main/Download/@ViewBag.vid" id="fname">Download</a></li>
+                        </ul>
+                    </div>
+
+                    <div id="c1">
+
+                        @foreach (var x in Model)
+                        {
+                            <textarea rows="1" cols="100"  placeholder="comment here" style="background-color:burlywood">
+                                @x.message
+                            </textarea>
+                        }
+
+                    </div>
+
+                        <div id="messageArea">
+      <input type="text" name="messageArea" required="required" value="" placeholder="comment here" style="background-color:bisque" />
+                        </div>
+
+                    <div id="post">
+                        <input type="button"  id="post" name="post" value="post Comment" class="btn btn-info " />
+                    </div>
+
+                    </div>
+
+            </blockquote>
+         </div>
+</div>

@@ -1,0 +1,85 @@
+﻿@{
+    ViewBag.Title = "uploadVideo";
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <link rel="stylesheet" href="/resources/demos/style.css">
+}
+
+
+@{
+    <script>
+        $(function () {
+            var availableTags = [
+              "ActionScript",
+              "AppleScript",
+              "Asp",
+              "BASIC",
+              "C",
+              "C++",
+              "Clojure",
+              "COBOL",
+              "ColdFusion",
+              "Erlang",
+              "Fortran",
+              "Groovy",
+              "Haskell",
+              "Java",
+              "JavaScript",
+              "Lisp",
+              "Perl",
+              "PHP",
+              "Python",
+              "Ruby",
+              "Scala",
+              "Scheme"
+            ];
+
+            $("#tags").autocomplete({
+                source: availableTags
+            });
+        });
+    </script>
+}
+
+<head>
+        <meta charset="utf-8">
+        <title>jQuery UI Autocomplete - Default functionality</title>
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+        <link rel="stylesheet" href="/resources/demos/style.css">
+</head>
+
+
+<h2>uploadVideo</h2>
+
+<form action="/Main/SaveVideo" method="post" enctype="multipart/form-data">
+    <div class="well" style="background-color:aliceblue ">
+        
+        <div>
+            File:
+           <input type="file" accept="video/*" name="file" />
+        </div>
+
+
+        <div class="ui-widget">
+            <label for="tags">Tags: </label>
+            <input id="tags"  placeholder="enter video tag here">
+        </div>
+
+        <div class="ui-widget">
+            <label for="cats">Category:</label>
+            <input id="cat" placeholder="enter video category here">
+        </div>
+            
+        <div class="btn btn-info">
+            &nbsp;
+            <input type="submit" accept="video/*" name="submit" value="upload Video" />
+        </div>
+    </div>
+</form>
